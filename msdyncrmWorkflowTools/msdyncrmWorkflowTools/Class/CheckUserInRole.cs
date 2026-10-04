@@ -28,7 +28,7 @@ namespace msdyncrmWorkflowTools
             #region "Read Parameters"
             var roleReference = Role.Get(executionContext);
 
-            objCommon.tracingService.Trace(String.Format("RoleId: {0} ", roleReference.Id.ToString()));
+            objCommon.tracingService.Trace(string.Format("RoleId: {0} ", roleReference.Id.ToString()));
             #endregion
 
            

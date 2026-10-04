@@ -13,7 +13,7 @@ namespace msdyncrmWorkflowTools.Class
         [RequiredArgument]
         [Input("Record URL")]
         [ReferenceTarget("")]
-        public InArgument<String> ClonningRecordURL { get; set; }
+        public InArgument<string> ClonningRecordURL { get; set; }
 
         [Input("Process")]
         [ReferenceTarget("workflow")]

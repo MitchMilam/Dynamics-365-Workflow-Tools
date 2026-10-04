@@ -35,7 +35,7 @@ namespace msdyncrmWorkflowTools
             
             userReference = User.Get(executionContext);
             
-            objCommon.tracingService.Trace(String.Format("TeamId: {0} ", teamReference.Id.ToString()));
+            objCommon.tracingService.Trace(string.Format("TeamId: {0} ", teamReference.Id.ToString()));
             #endregion
 
             var userId = objCommon.context.InitiatingUserId.ToString();
@@ -55,7 +55,7 @@ namespace msdyncrmWorkflowTools
                                                              </link-entity>
                                                            </entity></fetch> ";
 
-            objCommon.tracingService.Trace(String.Format("FetchXML: {0} ", fetchXML));
+            objCommon.tracingService.Trace(string.Format("FetchXML: {0} ", fetchXML));
             var givenTeams = objCommon.service.RetrieveMultiple(new FetchExpression (fetchXML));
 
             var UserInTeam = (givenTeams.Entities.Count > 0);

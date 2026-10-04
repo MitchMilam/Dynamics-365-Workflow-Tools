@@ -12,7 +12,7 @@ namespace msdyncrmWorkflowTools.Class
         [RequiredArgument]
         [Input("Record ID")]
         [ReferenceTarget("")]
-        public InArgument<String> RecordID { get; set; }
+        public InArgument<string> RecordID { get; set; }
 
         
         [Input("Process")]

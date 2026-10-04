@@ -1,5 +1,4 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Workflow;
 
@@ -86,7 +85,7 @@ namespace msdyncrmWorkflowTools
             var isSendAsAllowed = IsSendAsAllowed.Get(executionContext);
             
 
-            objCommon.tracingService.Trace(String.Format("UserID: {0} ", userReference.Id.ToString()));
+            objCommon.tracingService.Trace(string.Format("UserID: {0} ", userReference.Id.ToString()));
             #endregion
 
             var newSettings = new Entity("usersettings");

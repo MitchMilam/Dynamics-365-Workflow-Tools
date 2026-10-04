@@ -1,5 +1,4 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using System.Text;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
@@ -38,10 +37,10 @@ namespace msdyncrmWorkflowTools.Class
             #region "Read Parameters"
             var sourceQueue = SourceQueue.Get(executionContext);
 
-            objCommon.tracingService.Trace(String.Format("sourceQueue: {0} ", sourceQueue.Id.ToString()));
+            objCommon.tracingService.Trace(string.Format("sourceQueue: {0} ", sourceQueue.Id.ToString()));
 
             var countOnlyUnassigned = CountOnlyUnassigned.Get(executionContext);
-            objCommon.tracingService.Trace(String.Format("countOnlyUnassigned: {0} ", countOnlyUnassigned.ToString()));
+            objCommon.tracingService.Trace(string.Format("countOnlyUnassigned: {0} ", countOnlyUnassigned.ToString()));
 
 
             #endregion
@@ -63,7 +62,7 @@ namespace msdyncrmWorkflowTools.Class
                       </entity>
                     </fetch>");
 
-            objCommon.tracingService.Trace(String.Format("FetchXML: {0} ", sFetchXML.ToString()));
+            objCommon.tracingService.Trace(string.Format("FetchXML: {0} ", sFetchXML.ToString()));
             var queueItemsCount = objCommon.service.RetrieveMultiple(new FetchExpression(sFetchXML.ToString()));
 
             if (queueItemsCount.Entities.Count == 0)
@@ -76,7 +75,7 @@ namespace msdyncrmWorkflowTools.Class
 
             foreach (var c in queueItemsCount.Entities)
             {
-                var aggregate2 = (Int32)((AliasedValue)c["queueitem_count"]).Value;
+                var aggregate2 = (int)((AliasedValue)c["queueitem_count"]).Value;
                 System.Console.WriteLine("Count of all queueItemsCount: " + aggregate2);
                 ItemsCount.Set(executionContext, aggregate2);
 

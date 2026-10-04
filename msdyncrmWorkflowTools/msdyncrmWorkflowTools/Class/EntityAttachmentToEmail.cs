@@ -1,5 +1,4 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using System.Linq;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Workflow;
@@ -12,12 +11,12 @@ namespace msdyncrmWorkflowTools.Class
         [RequiredArgument]
         [Input("Main Record URL")]
         [ReferenceTarget("")]
-        public InArgument<String> MainRecordURL { get; set; }
+        public InArgument<string> MainRecordURL { get; set; }
 
         [RequiredArgument]
         [Input("File Name (use * for filter)")]
         [ReferenceTarget("")]
-        public InArgument<String> FileName { get; set; }
+        public InArgument<string> FileName { get; set; }
 
         [RequiredArgument]
         [Input("Email")]
@@ -25,10 +24,10 @@ namespace msdyncrmWorkflowTools.Class
         public InArgument<EntityReference> Email { get; set; }
 
         [Input("Retrieve ActivityMimeAttachment")]
-        public InArgument<Boolean> RetrieveActivityMimeAttachment { get; set; }
+        public InArgument<bool> RetrieveActivityMimeAttachment { get; set; }
 
         [Input("Select Most Recent Distinct Files")]
-        public InArgument<Boolean> MostRecent { get; set; }
+        public InArgument<bool> MostRecent { get; set; }
 
         [Input("Top Attachments (Most Recent)")]
         public InArgument<int> TopRecords { get; set; }

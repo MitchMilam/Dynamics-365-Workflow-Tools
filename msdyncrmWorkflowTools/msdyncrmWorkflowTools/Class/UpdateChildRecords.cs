@@ -1,5 +1,4 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using System.Linq;
 using Microsoft.Xrm.Sdk.Workflow;
 
@@ -11,29 +10,29 @@ namespace msdyncrmWorkflowTools
         [RequiredArgument]
         [Input("Parent Record URL")]
         [ReferenceTarget("")]
-        public InArgument<String> ParentRecordURL { get; set; }
+        public InArgument<string> ParentRecordURL { get; set; }
 
         [RequiredArgument]
         [Input("Relationship Name")]
         [ReferenceTarget("")]
-        public InArgument<String> RelationshipName { get; set; }
+        public InArgument<string> RelationshipName { get; set; }
 
         [Input("Parent Field Name")]
         [ReferenceTarget("")]
-        public InArgument<String> ParentFieldNameToUpdate { get; set; }
+        public InArgument<string> ParentFieldNameToUpdate { get; set; }
 
         [Input("Value to Set")]
         [ReferenceTarget("")]
-        public InArgument<String> ValueToSet{ get; set; }
+        public InArgument<string> ValueToSet{ get; set; }
 
         [RequiredArgument]
         [Input("Child Field Name to Update")]
         [ReferenceTarget("")]
-        public InArgument<String> ChildFieldNameToUpdate { get; set; }
+        public InArgument<string> ChildFieldNameToUpdate { get; set; }
 
         [RequiredArgument]
         [Input("Update only Active")]
-        public InArgument<Boolean> UpdateonlyActive { get; set; }
+        public InArgument<bool> UpdateonlyActive { get; set; }
 
         //string relationshipName, string parentFieldNameToUpdate, string setValueToUpdate, string childFieldNameToUpdate
         //string parentEntityId, string parentEntityType, 

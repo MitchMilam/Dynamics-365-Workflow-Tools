@@ -35,7 +35,7 @@ namespace msdyncrmWorkflowTools.Class
 
             #region "Read Parameters"
             var marketingList = MarketingList.Get(executionContext);
-            objCommon.tracingService.Trace(String.Format("marketingList: {0} ", marketingList.Id.ToString()));
+            objCommon.tracingService.Trace(string.Format("marketingList: {0} ", marketingList.Id.ToString()));
 
             var account = this.account.Get(executionContext);
 
@@ -59,7 +59,7 @@ namespace msdyncrmWorkflowTools.Class
             {
                 idToRemove = lead.Id;
             }
-            objCommon.tracingService.Trace(String.Format("idToRemove: {0} ", idToRemove.ToString()));
+            objCommon.tracingService.Trace(string.Format("idToRemove: {0} ", idToRemove.ToString()));
 
             var removeRequest = new RemoveMemberListRequest();
             removeRequest.ListId = marketingList.Id;

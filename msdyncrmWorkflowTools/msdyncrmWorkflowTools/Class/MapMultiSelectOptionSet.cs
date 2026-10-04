@@ -26,7 +26,7 @@ namespace msdyncrmWorkflowTools
         /// </summary>
         [Input("Keep Existing Values")]
         [Default("false")]
-        public InArgument<Boolean> KeepExistingValues { get; set; }
+        public InArgument<bool> KeepExistingValues { get; set; }
 
         protected override void Execute(CodeActivityContext executionContext)
         {
@@ -143,7 +143,7 @@ namespace msdyncrmWorkflowTools
         {
             tracingService.Trace("Retrieving existing values");
 
-            var attributeValues = KeepExistingValues.Get<Boolean>(executionContext);
+            var attributeValues = KeepExistingValues.Get<bool>(executionContext);
 
             if (attributeValues == false)
                 return null;

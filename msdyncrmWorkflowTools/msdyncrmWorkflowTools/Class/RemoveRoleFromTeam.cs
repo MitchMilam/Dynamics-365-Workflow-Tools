@@ -32,7 +32,7 @@ namespace msdyncrmWorkflowTools
             var roleReference = Role.Get(executionContext);
             var teamReference = Team.Get(executionContext);
 
-            objCommon.tracingService.Trace(String.Format("RoleId: {0} - TeamID: {1} ", roleReference.Id.ToString(), teamReference.Id.ToString()));
+            objCommon.tracingService.Trace(string.Format("RoleId: {0} - TeamID: {1} ", roleReference.Id.ToString(), teamReference.Id.ToString()));
             #endregion
 
             var systemUser = (Entity)objCommon.service.Retrieve(

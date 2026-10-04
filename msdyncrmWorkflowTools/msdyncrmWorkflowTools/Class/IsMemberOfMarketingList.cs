@@ -32,7 +32,7 @@ namespace msdyncrmWorkflowTools.Class
 
             #region "Read Parameters"
             var marketingList = MarketingList.Get(executionContext);
-            objCommon.tracingService.Trace(String.Format("marketingList: {0} ", marketingList.Id.ToString()));
+            objCommon.tracingService.Trace(string.Format("marketingList: {0} ", marketingList.Id.ToString()));
 
 
             #endregion

@@ -15,7 +15,7 @@ namespace msdyncrmWorkflowTools
         [RequiredArgument]
         [Input("Sharing Record URL")]
         [ReferenceTarget("")]
-        public InArgument<String> SharingRecordURL { get; set; }
+        public InArgument<string> SharingRecordURL { get; set; }
 
         [RequiredArgument]
         [Input("User")]
@@ -127,7 +127,7 @@ namespace msdyncrmWorkflowTools
 
         }
 
-        UInt32 getMask(CodeActivityContext executionContext)
+        uint getMask(CodeActivityContext executionContext)
         {
             var ShareAppend = this.ShareAppend.Get(executionContext);
             var ShareAppendTo = this.ShareAppendTo.Get(executionContext);
@@ -137,35 +137,35 @@ namespace msdyncrmWorkflowTools
             var ShareShare = this.ShareShare.Get(executionContext);
             var ShareWrite = this.ShareWrite.Get(executionContext);
 
-            UInt32 mask = 0;
+            uint mask = 0;
             if (ShareAppend)
             {
-                mask |= (UInt32)AccessRights.AppendAccess;
+                mask |= (uint)AccessRights.AppendAccess;
             }
             if (ShareAppendTo)
             {
-                mask |= (UInt32)AccessRights.AppendToAccess;
+                mask |= (uint)AccessRights.AppendToAccess;
             }
             if (ShareAssign)
             {
-                mask |= (UInt32)AccessRights.AssignAccess;
+                mask |= (uint)AccessRights.AssignAccess;
             }
 
             if (ShareDelete)
             {
-                mask |= (UInt32)AccessRights.DeleteAccess;
+                mask |= (uint)AccessRights.DeleteAccess;
             }
             if (ShareRead)
             {
-                mask |= (UInt32)AccessRights.ReadAccess;
+                mask |= (uint)AccessRights.ReadAccess;
             }
             if (ShareShare)
             {
-                mask |= (UInt32)AccessRights.ShareAccess;
+                mask |= (uint)AccessRights.ShareAccess;
             }
             if (ShareWrite)
             {
-                mask |= (UInt32)AccessRights.WriteAccess;
+                mask |= (uint)AccessRights.WriteAccess;
             }
 
 

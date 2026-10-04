@@ -419,7 +419,7 @@ namespace msdyncrmWorkflowTools
             replacedText = "";
             if (!caseSensitive)
             {
-                if (!String.IsNullOrEmpty(inputText) && !String.IsNullOrEmpty(replaceOldValue))
+                if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrEmpty(replaceOldValue))
                 {
                     replacedText = inputText.Replace(replaceOldValue, replaceNewValue);
                 }
@@ -433,7 +433,7 @@ namespace msdyncrmWorkflowTools
             subStringText = "";
             if (subStringLength <= 0 || startIndex < 0)
             {
-                subStringText = String.Empty;
+                subStringText = string.Empty;
             }
             else
             {
@@ -471,7 +471,7 @@ namespace msdyncrmWorkflowTools
 
         private static string CompareAndReplace(string text, string old, string @new, StringComparison comparison)
         {
-            if (String.IsNullOrEmpty(text) || String.IsNullOrEmpty(old)) return text;
+            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(old)) return text;
 
             var result = new StringBuilder();
             var oldLength = old.Length;
@@ -591,12 +591,12 @@ namespace msdyncrmWorkflowTools
                         </filter>
                       </entity>
                     </fetch>";
-            if (tracing != null) tracing.Trace(String.Format("FetchXML: {0} ", fetchXML));
+            if (tracing != null) tracing.Trace(string.Format("FetchXML: {0} ", fetchXML));
             var attachmentFiles = service.RetrieveMultiple(new FetchExpression(fetchXML));
 
             if (attachmentFiles.Entities.Count == 0)
             {
-                if (tracing != null) tracing.Trace(String.Format("No Attachment Files found."));
+                if (tracing != null) tracing.Trace(string.Format("No Attachment Files found."));
                 return;
             }
 
@@ -932,11 +932,11 @@ namespace msdyncrmWorkflowTools
             }
 
         }
-        public Decimal CurrencyConvert(decimal amount, string fromCurrency, string toCurrency)
+        public decimal CurrencyConvert(decimal amount, string fromCurrency, string toCurrency)
         {
 
             var web = new WebClient();
-            var apiURL = String.Format("http://finance.google.com/finance/converter?a={0}&from={1}&to={2}", amount, fromCurrency.ToUpper(), toCurrency.ToUpper());
+            var apiURL = string.Format("http://finance.google.com/finance/converter?a={0}&from={1}&to={2}", amount, fromCurrency.ToUpper(), toCurrency.ToUpper());
             var response = web.DownloadString(apiURL);
             var split = response.Split((new string[] { "<span class=bld>" }), StringSplitOptions.None);
             var value = split[1].Split(' ')[0];

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using Microsoft.Xrm.Sdk.Workflow;
 namespace msdyncrmWorkflowTools.Class
 {
@@ -38,7 +37,7 @@ namespace msdyncrmWorkflowTools.Class
             #region "Read Parameters"
             var number1= Number1.Get(executionContext);
             var number2 = Number2.Get(executionContext);
-            objCommon.tracingService.Trace(String.Format("number 1 / number 2: {0} / {1}", number1.ToString(), number2.ToString()));
+            objCommon.tracingService.Trace(string.Format("number 1 / number 2: {0} / {1}", number1.ToString(), number2.ToString()));
 
             #endregion
 

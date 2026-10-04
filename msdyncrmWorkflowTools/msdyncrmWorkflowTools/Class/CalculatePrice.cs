@@ -14,7 +14,7 @@ namespace msdyncrmWorkflowTools
         [RequiredArgument]
         [Input("Target Record URL")]
         [ReferenceTarget("")]
-        public InArgument<String> TargetRecordURL { get; set; }
+        public InArgument<string> TargetRecordURL { get; set; }
         #endregion
         protected override void Execute(CodeActivityContext executionContext)
         {

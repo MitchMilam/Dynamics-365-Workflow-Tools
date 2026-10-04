@@ -44,7 +44,7 @@ namespace msdyncrmWorkflowTools
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Url '{0}' is incorrectly formated for a Dynamics CRM Dynamics Url", url), ex);
+                throw new Exception(string.Format("Url '{0}' is incorrectly formated for a Dynamics CRM Dynamics Url", url), ex);
             }
         }
 

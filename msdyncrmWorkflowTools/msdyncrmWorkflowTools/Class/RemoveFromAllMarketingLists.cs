@@ -78,7 +78,7 @@ namespace msdyncrmWorkflowTools.Class
 
         public bool DoesCrmRecordExist(IOrganizationService service, string entityName, Guid id)
         {
-            var idColumnName = String.Format("{0}id", entityName);
+            var idColumnName = string.Format("{0}id", entityName);
 
             var query = new QueryByAttribute(entityName);
 

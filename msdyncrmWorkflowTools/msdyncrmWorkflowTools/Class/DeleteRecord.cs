@@ -15,15 +15,15 @@ namespace msdyncrmWorkflowTools.Class
 
         [Input("Record URL")]
         [ReferenceTarget("")]
-        public InArgument<String> DeleteRecordURL { get; set; }
+        public InArgument<string> DeleteRecordURL { get; set; }
 
         [Input("Entity Type Name")]
         [ReferenceTarget("")]
-        public InArgument<String> EntityTypeName { get; set; }
+        public InArgument<string> EntityTypeName { get; set; }
 
         [Input("Entity Guid")]
         [ReferenceTarget("")]
-        public InArgument<String> EntityGuid { get; set; }
+        public InArgument<string> EntityGuid { get; set; }
 
 
         protected override void Execute(CodeActivityContext executionContext)

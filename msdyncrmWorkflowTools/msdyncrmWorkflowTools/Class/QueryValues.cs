@@ -1,5 +1,4 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk.Workflow;
@@ -12,46 +11,46 @@ namespace msdyncrmWorkflowTools
         [RequiredArgument]
         [Input("EntityName")]
         [Default("")]
-        public InArgument<String> EntityName { get; set; }
+        public InArgument<string> EntityName { get; set; }
 
         [RequiredArgument]
         [Input("Attribute1")]
         [ReferenceTarget("")]
-        public InArgument<String> Attribute1 { get; set; }
+        public InArgument<string> Attribute1 { get; set; }
 
         [RequiredArgument]
         [Input("Attribute2")]
         [ReferenceTarget("")]
-        public InArgument<String> Attribute2 { get; set; }
+        public InArgument<string> Attribute2 { get; set; }
 
         [RequiredArgument]
         [Input("FilterAttibute1")]
         [ReferenceTarget("")]
-        public InArgument<String> FilterAttribute1 { get; set; }
+        public InArgument<string> FilterAttribute1 { get; set; }
 
         [RequiredArgument]
         [Input("ValueAttribute1")]
         [ReferenceTarget("")]
-        public InArgument<String> ValueAttribute1 { get; set; }
+        public InArgument<string> ValueAttribute1 { get; set; }
 
         
         [Input("FilterAttribute2")]
         [ReferenceTarget("")]
-        public InArgument<String> FilterAttribute2 { get; set; }
+        public InArgument<string> FilterAttribute2 { get; set; }
 
         
         [Input("ValueAttribute2")]
         [ReferenceTarget("")]
-        public InArgument<String> ValueAttribute2 { get; set; }
+        public InArgument<string> ValueAttribute2 { get; set; }
 
 
 
         [Output("ResultValue1")]
-        public OutArgument<String> ResultValue1 { get; set; }
+        public OutArgument<string> ResultValue1 { get; set; }
 
 
         [Output("ResultValue2")]
-        public OutArgument<String> ResultValue2 { get; set; }
+        public OutArgument<string> ResultValue2 { get; set; }
 
         
         #endregion
@@ -73,7 +72,7 @@ namespace msdyncrmWorkflowTools
             var _ValueAttribute1 = ValueAttribute1.Get(executionContext);
             var _ValueAttribute2 = ValueAttribute2.Get(executionContext);
 
-            objCommon.tracingService.Trace(String.Format("EntityName: {0} - Attribute1:{1} - Attribute2:{2} - FilterAttribute1:{3} - FilterAttribute2:{4} - ValueAttribute1:{5} ValueAttribute2:{6}",
+            objCommon.tracingService.Trace(string.Format("EntityName: {0} - Attribute1:{1} - Attribute2:{2} - FilterAttribute1:{3} - FilterAttribute2:{4} - ValueAttribute1:{5} ValueAttribute2:{6}",
                 _EntityName, _Attribute1, _Attribute2, _FilterAttribute1, _FilterAttribute2, _ValueAttribute1, _ValueAttribute2));
             #endregion
             try
@@ -107,19 +106,19 @@ namespace msdyncrmWorkflowTools
                 }
                 qe.Criteria = filter;
 
-                objCommon.tracingService.Trace(String.Format("Executing Query..."));
+                objCommon.tracingService.Trace(string.Format("Executing Query..."));
 
                 var results = objCommon.service.RetrieveMultiple(qe);
 
-                objCommon.tracingService.Trace(String.Format("Executed Query Ok, {0} records ...", results.Entities.Count));
+                objCommon.tracingService.Trace(string.Format("Executed Query Ok, {0} records ...", results.Entities.Count));
 
 
                 if (results.Entities.Count > 0)
                 {
-                    objCommon.tracingService.Trace(String.Format("Setting results"));
+                    objCommon.tracingService.Trace(string.Format("Setting results"));
                     if (results.Entities[0].Attributes.Contains(_Attribute1))
                     {
-                        objCommon.tracingService.Trace(String.Format("Setting result1: {0}", results.Entities[0].Attributes[_Attribute1]));
+                        objCommon.tracingService.Trace(string.Format("Setting result1: {0}", results.Entities[0].Attributes[_Attribute1]));
                         if (results.Entities[0].Attributes[_Attribute1] is Microsoft.Xrm.Sdk.OptionSetValue)
                         {
                             objCommon.tracingService.Trace("Value1 Is an OptionSetValue");
@@ -139,7 +138,7 @@ namespace msdyncrmWorkflowTools
                     }
                     if (results.Entities[0].Attributes.Contains(_Attribute2))
                     {
-                        objCommon.tracingService.Trace(String.Format("Setting result2: {0}", results.Entities[0].Attributes[_Attribute2]));
+                        objCommon.tracingService.Trace(string.Format("Setting result2: {0}", results.Entities[0].Attributes[_Attribute2]));
                         if (results.Entities[0].Attributes[_Attribute2] is Microsoft.Xrm.Sdk.OptionSetValue)
                         {
                             objCommon.tracingService.Trace("Value2 Is an OptionSetValue");
@@ -158,13 +157,13 @@ namespace msdyncrmWorkflowTools
                             ResultValue2.Set(executionContext, results.Entities[0].Attributes[_Attribute2].ToString());
                         }
                     }
-                    objCommon.tracingService.Trace(String.Format("End setting results"));
+                    objCommon.tracingService.Trace(string.Format("End setting results"));
                 }
                 #endregion
             }
             catch (System.Exception ex)
             {
-                objCommon.tracingService.Trace(String.Format("error: {0} - {1}",ex.Message, ex.StackTrace));
+                objCommon.tracingService.Trace(string.Format("error: {0} - {1}",ex.Message, ex.StackTrace));
                 throw ex;
 
             }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using System.Text;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
@@ -40,13 +39,13 @@ namespace msdyncrmWorkflowTools.Class
             #region "Read Parameters"
             var sourceQueue = SourceQueue.Get(executionContext);
 
-            objCommon.tracingService.Trace(String.Format("sourceQueue: {0} ", sourceQueue.Id.ToString()));
+            objCommon.tracingService.Trace(string.Format("sourceQueue: {0} ", sourceQueue.Id.ToString()));
 
             var removeItems = RemoveItems.Get(executionContext);
-            objCommon.tracingService.Trace(String.Format("removeItems: {0} ", removeItems.ToString()));
+            objCommon.tracingService.Trace(string.Format("removeItems: {0} ", removeItems.ToString()));
 
             var quantity = Quantity.Get(executionContext);
-            objCommon.tracingService.Trace(String.Format("quantity: {0} ", quantity.ToString()));
+            objCommon.tracingService.Trace(string.Format("quantity: {0} ", quantity.ToString()));
 
             #endregion
 
@@ -67,7 +66,7 @@ namespace msdyncrmWorkflowTools.Class
                       </entity>
                     </fetch>");
 
-            objCommon.tracingService.Trace(String.Format("FetchXML: {0} ", sFetchXML.ToString()));
+            objCommon.tracingService.Trace(string.Format("FetchXML: {0} ", sFetchXML.ToString()));
             var queueItems = objCommon.service.RetrieveMultiple(new FetchExpression(sFetchXML.ToString()));
 
             if (queueItems.Entities.Count == 0)

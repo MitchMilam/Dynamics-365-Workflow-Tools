@@ -1,5 +1,4 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using Microsoft.Xrm.Sdk.Workflow;
 
 namespace msdyncrmWorkflowTools
@@ -10,7 +9,7 @@ namespace msdyncrmWorkflowTools
         [RequiredArgument]
         [Input("Input Text")]
         [Default("")]
-        public InArgument<String> InputText { get; set; }
+        public InArgument<string> InputText { get; set; }
 
         [RequiredArgument]
         [Input("Capitalize All Words")]
@@ -21,7 +20,7 @@ namespace msdyncrmWorkflowTools
         [RequiredArgument]
         [Input("Padding: Pad Character")]
         [Default("")]
-        public InArgument<String> PadCharacter { get; set; }
+        public InArgument<string> PadCharacter { get; set; }
 
 
         [RequiredArgument]
@@ -37,11 +36,11 @@ namespace msdyncrmWorkflowTools
         [RequiredArgument]
         [Input("Replace: Old Value")]
         [Default("")]
-        public InArgument<String> ReplaceOldValue { get; set; }
+        public InArgument<string> ReplaceOldValue { get; set; }
 
         [Input("Replace: New Value")]
         [Default("")]
-        public InArgument<String> ReplaceNewValue { get; set; }
+        public InArgument<string> ReplaceNewValue { get; set; }
 
         [RequiredArgument]
         [Input("Replace: Case Sensitive")]
@@ -67,11 +66,11 @@ namespace msdyncrmWorkflowTools
         [RequiredArgument]
         [Input("Regular Expression")]
         [Default("")]
-        public InArgument<String> RegularExpression { get; set; }
+        public InArgument<string> RegularExpression { get; set; }
 
 
         [Output("Capitalized Text")]
-        public OutArgument<String> CapitalizedText { get; set; }
+        public OutArgument<string> CapitalizedText { get; set; }
 
         [Output("Text Length")]
         public OutArgument<int> TextLength { get; set; }
