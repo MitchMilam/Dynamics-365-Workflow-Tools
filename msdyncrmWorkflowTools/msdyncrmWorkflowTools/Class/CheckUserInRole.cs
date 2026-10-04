@@ -33,7 +33,7 @@ namespace msdyncrmWorkflowTools
 
            
 
-            Console.WriteLine("Checking association between user and role.");
+            objCommon.tracingService.Trace("Checking association between user and role.");
             // Establish a SystemUser link for a query.
             var systemUserLink = new LinkEntity()
             {
@@ -85,9 +85,9 @@ namespace msdyncrmWorkflowTools
             var UserInRole = (matchEntities.Entities.Count > 0);
 
             if (UserInRole)
-                Console.WriteLine("User do not belong to the role.");
+                objCommon.tracingService.Trace("User do not belong to the role.");
             else
-                Console.WriteLine("User belong to this role.");
+                objCommon.tracingService.Trace("User belong to this role.");
 
             isUserInRole.Set(executionContext, UserInRole);
 

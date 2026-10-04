@@ -98,7 +98,7 @@ namespace msdyncrmWorkflowTools
 
             var qualifyIntoOpportunityRes =
                 (QualifyLeadResponse)objCommon.service.Execute(qualifyIntoOpportunityReq);
-            Console.WriteLine("  Executed OK.");
+            objCommon.tracingService.Trace("  Executed OK.");
 
 
             #endregion

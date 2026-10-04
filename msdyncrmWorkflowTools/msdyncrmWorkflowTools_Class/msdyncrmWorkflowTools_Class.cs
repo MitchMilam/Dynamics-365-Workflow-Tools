@@ -706,7 +706,7 @@ namespace msdyncrmWorkflowTools
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error : {0} - {1}", ex.Message, ex.StackTrace);
+                tracing?.Trace("Error : {0} - {1}", ex.Message, ex.StackTrace);
                 //    objCommon.tracingService.Trace("Error : {0} - {1}", ex.Message, ex.StackTrace);//
                 //throw ex;
                 // if (ex.Detail.ErrorCode != 2147220937)//ignore if the error is a duplicate insert
@@ -926,7 +926,7 @@ namespace msdyncrmWorkflowTools
                 result = await response.Content.ReadAsStringAsync();
                 // NOTE: A successful response is returned in XML. You can extract the contents of the XML as follows.
                 // var content = XElement.Parse(result).Value;
-                Console.WriteLine(result);
+                tracing?.Trace("{0}", result);
 
 
             }

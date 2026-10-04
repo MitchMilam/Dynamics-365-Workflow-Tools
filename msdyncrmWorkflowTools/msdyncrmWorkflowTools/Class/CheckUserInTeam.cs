@@ -61,9 +61,9 @@ namespace msdyncrmWorkflowTools
             var UserInTeam = (givenTeams.Entities.Count > 0);
 
             if (UserInTeam)
-                Console.WriteLine("User do not belong to the team.");
+                objCommon.tracingService.Trace("User do not belong to the team.");
             else
-                Console.WriteLine("User belong to this team.");
+                objCommon.tracingService.Trace("User belong to this team.");
 
             isUserInTeam.Set(executionContext, UserInTeam);
 
