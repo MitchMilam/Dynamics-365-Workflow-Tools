@@ -35,15 +35,15 @@ namespace msdyncrmWorkflowTools
 
             #region "Read Parameters"
             var _SerializingRecordURL = SerializingRecordURL.Get(executionContext);
-            if (_SerializingRecordURL == null || _SerializingRecordURL == "")
+            if (_SerializingRecordURL == null || _SerializingRecordURL == string.Empty)
             {
                 return;
             }
             var urlParts = _SerializingRecordURL.Split("?".ToArray());
             var urlParams = urlParts[1].Split("&".ToCharArray());
-            var objectTypeCode = urlParams[0].Replace("etc=", "");
+            var objectTypeCode = urlParams[0].Replace("etc=", string.Empty);
             var entityName = objCommon.sGetEntityNameFromCode(objectTypeCode, objCommon.service);
-            var objectId = urlParams[1].Replace("id=", "");
+            var objectId = urlParams[1].Replace("id=", string.Empty);
             objCommon.tracingService.Trace("ObjectTypeCode=" + objectTypeCode + "--ParentId=" + objectId);
 
 
@@ -55,8 +55,8 @@ namespace msdyncrmWorkflowTools
             objCommon.tracingService.Trace("retrieved object OK");
 
             var newEntity = new Entity(entityName);
-            var PrimaryIdAttribute = "" ;
-            var PrimaryNameAttribute = "";
+            var PrimaryIdAttribute = string.Empty ;
+            var PrimaryNameAttribute = string.Empty;
             var atts= objCommon.getEntityAttributesToClone(entityName, objCommon.service, ref PrimaryIdAttribute, ref PrimaryNameAttribute);
 
             var sJson = new StringBuilder("{\""+ entityName + "\": {");
@@ -78,7 +78,7 @@ namespace msdyncrmWorkflowTools
                     }
                     else if (t.Equals(typeof(bool)))
                     {
-                        sJson.Append("\"" + att + "\" : " + retrievedObject.Attributes[att].ToString().ToLower() + "");
+                        sJson.Append("\"" + att + "\" : " + retrievedObject.Attributes[att].ToString().ToLower() + string.Empty);
                     }
                     else if (t.Equals(typeof(OptionSetValue)))
                     {

@@ -47,7 +47,7 @@ namespace msdyncrmWorkflowTools
             var commonClass = new msdyncrmWorkflowTools_Class(objCommon.service, objCommon.tracingService);
             var res=commonClass.TranslateText(_TextToTranslate, _Language, _Authenticationkey);
 
-            if (res == null) res = "";
+            if (res == null) res = string.Empty;
 
             TranslatedText.Set(executionContext, res);
             

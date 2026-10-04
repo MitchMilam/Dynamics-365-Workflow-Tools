@@ -39,7 +39,7 @@ namespace msdyncrmWorkflowTools
 
             #region "Read Parameters"
             var _FetchXML = FetchXML.Get(executionContext);
-            if (_FetchXML == null || _FetchXML == "")
+            if (_FetchXML == null || _FetchXML == string.Empty)
             {
                 return;
             }

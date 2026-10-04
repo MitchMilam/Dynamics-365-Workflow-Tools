@@ -38,14 +38,14 @@ namespace msdyncrmWorkflowTools
 
             #region "Read Parameters"
             var _SharingRecordURL = SharingRecordURL.Get(executionContext);
-            if (_SharingRecordURL == null || _SharingRecordURL == "")
+            if (_SharingRecordURL == null || _SharingRecordURL == string.Empty)
             {
                 return;
             }
             var urlParts = _SharingRecordURL.Split("?".ToArray());
             var urlParams = urlParts[1].Split("&".ToCharArray());
-            var objectTypeCode = urlParams[0].Replace("etc=", "");
-            var objectId = urlParams[1].Replace("id=", "");
+            var objectTypeCode = urlParams[0].Replace("etc=", string.Empty);
+            var objectId = urlParams[1].Replace("id=", string.Empty);
             objCommon.tracingService.Trace("ObjectTypeCode=" + objectTypeCode + "--ParentId=" + objectId);
 
             var teamReference = Team.Get(executionContext);

@@ -84,11 +84,11 @@ namespace msdyncrmWorkflowTools
                 var qe = new QueryExpression();
                 qe.EntityName = _EntityName;
                 qe.ColumnSet = new ColumnSet();
-                if (_Attribute1 != null && _Attribute1 != "") qe.ColumnSet.Columns.Add(_Attribute1);
-                if (_Attribute2 != null && _Attribute2 != "") qe.ColumnSet.Columns.Add(_Attribute2);
+                if (_Attribute1 != null && _Attribute1 != string.Empty) qe.ColumnSet.Columns.Add(_Attribute1);
+                if (_Attribute2 != null && _Attribute2 != string.Empty) qe.ColumnSet.Columns.Add(_Attribute2);
 
                 var filter = new FilterExpression(LogicalOperator.And);
-                if (_FilterAttribute1 != null && _FilterAttribute1 != "")
+                if (_FilterAttribute1 != null && _FilterAttribute1 != string.Empty)
                 {
                     var condition1 = new ConditionExpression();
                     condition1.AttributeName = _FilterAttribute1;
@@ -96,7 +96,7 @@ namespace msdyncrmWorkflowTools
                     condition1.Operator = ConditionOperator.Equal;
                     filter.Conditions.Add(condition1);
                 }
-                if (_FilterAttribute2 != null && _FilterAttribute2 != "")
+                if (_FilterAttribute2 != null && _FilterAttribute2 != string.Empty)
                 {
                     var condition2 = new ConditionExpression();
                     condition2.AttributeName = _FilterAttribute2;

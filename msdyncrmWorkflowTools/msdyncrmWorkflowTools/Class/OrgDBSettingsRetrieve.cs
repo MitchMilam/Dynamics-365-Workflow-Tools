@@ -45,7 +45,7 @@ namespace msdyncrmWorkflowTools
 
             var _NumericValue = 0;
             var _BoolValue = false;
-            var _StringValue = "";
+            var _StringValue = string.Empty;
 
             try
             {

@@ -27,14 +27,14 @@ namespace msdyncrmWorkflowTools
 
             #region "Read Parameters"
             var _TargetRecordURL = TargetRecordURL.Get(executionContext);
-            if (_TargetRecordURL == null || _TargetRecordURL == "")
+            if (_TargetRecordURL == null || _TargetRecordURL == string.Empty)
             {
                 return;
             }
             var urlParts = _TargetRecordURL.Split("?".ToArray());
             var urlParams = urlParts[1].Split("&".ToCharArray());
-            var ParentObjectTypeCode = urlParams[0].Replace("etc=", "");
-            var ParentId = urlParams[1].Replace("id=", "");
+            var ParentObjectTypeCode = urlParams[0].Replace("etc=", string.Empty);
+            var ParentId = urlParams[1].Replace("id=", string.Empty);
             objCommon.tracingService.Trace("ParentObjectTypeCode=" + ParentObjectTypeCode + "--ParentId=" + ParentId);
             #endregion
 

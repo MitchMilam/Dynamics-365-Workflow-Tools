@@ -36,7 +36,7 @@ namespace msdyncrmWorkflowTools.Class
             var salesLiterature = SalesLiterature.Get(executionContext);
 
             var _FileName = FileName.Get(executionContext);
-            if (_FileName == null || _FileName == "")
+            if (_FileName == null || _FileName == string.Empty)
             {
                 return;
             }

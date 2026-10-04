@@ -36,15 +36,15 @@ namespace msdyncrmWorkflowTools.Class
 
             #region "Read Parameters"
             var _deleteRecordURL = DeleteRecordURL.Get(executionContext);
-            var entityName = "";
-            var objectId = "";
+            var entityName = string.Empty;
+            var objectId = string.Empty;
             if (_deleteRecordURL != null)
             {
                 var urlParts = _deleteRecordURL.Split("?".ToArray());
                 var urlParams = urlParts[1].Split("&".ToCharArray());
-                var objectTypeCode = urlParams[0].Replace("etc=", "");
+                var objectTypeCode = urlParams[0].Replace("etc=", string.Empty);
                 entityName = objCommon.sGetEntityNameFromCode(objectTypeCode, objCommon.service);
-                objectId = urlParams[1].Replace("id=", "");
+                objectId = urlParams[1].Replace("id=", string.Empty);
                 objCommon.tracingService.Trace("ObjectTypeCode=" + objectTypeCode + "--ParentId=" + objectId);
             }
             var _deleteUsingRecordURL = DeleteUsingRecordURL.Get(executionContext);
@@ -59,7 +59,7 @@ namespace msdyncrmWorkflowTools.Class
             {
                 objCommon.tracingService.Trace("Deleting record by URL: {0}", _deleteRecordURL);
 
-                if (_deleteRecordURL == null || _deleteRecordURL == "" )
+                if (_deleteRecordURL == null || _deleteRecordURL == string.Empty )
                 {
                     throw new InvalidOperationException("ERROR: Delete Record URL to be deleted missing.");
                 }
@@ -68,7 +68,7 @@ namespace msdyncrmWorkflowTools.Class
             else
             {
                 objCommon.tracingService.Trace("Record type to be deleted: "+ _entityTypeName+" and ID:"+ _entityGuid);
-                if (_entityTypeName == null || _entityTypeName == "" || _entityGuid == null || _entityGuid == "")
+                if (_entityTypeName == null || _entityTypeName == string.Empty || _entityGuid == null || _entityGuid == string.Empty)
                 {
                     throw new InvalidOperationException("ERROR: Entity Type name or GUID to be deleted missing.");
                 }
