@@ -92,6 +92,22 @@ namespace msdyncrmWorkflowTools_IntegrationTests
             Assert.AreEqual(0, StateOf(CopiesUnder(activeOnly).Single()));
         }
 
+        [TestMethod]
+        public void CloneRecordWithChildren_CopiesTheChildrenUnderTheCopy()
+        {
+            var source = Create(new Entity(EntityNames.Account) { [AttributeNames.Name] = UniqueName("clone with children") });
+            CreateContact(source);
+            CreateContact(source);
+
+            var id = Common.CloneRecordWithChildren(UrlFor(source), "contact_customer_accounts", null, "Copy ", null, null, false, false, out var childrenCloned);
+            var copy = new EntityReference(EntityNames.Account, id);
+            DeleteAfterTest(copy);
+
+            Assert.AreEqual(2, childrenCloned);
+            Assert.AreEqual(2, CopiesUnder(copy).Count);
+            Assert.AreEqual(2, Common.GetChildRecords("contact_customer_accounts", source.Id).Entities.Count, "the source keeps its own children");
+        }
+
         private List<EntityReference> CopiesUnder(EntityReference account)
         {
             var copies = Common.GetChildRecords("contact_customer_accounts", account.Id).Entities.Select(e => e.ToEntityReference()).ToList();

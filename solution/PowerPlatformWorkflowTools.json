@@ -108,6 +108,9 @@
     "msdyncrmWorkflowTools.CloneRecord": {
       "id": "a0d57196-0bc1-f111-a05a-6045bd061c5d"
     },
+    "msdyncrmWorkflowTools.CloneRecordWithChildren": {
+      "id": "b9d5b674-90f7-4456-af15-d6998bafdc99"
+    },
     "msdyncrmWorkflowTools.ConcatenateFromQuery": {
       "id": "c757c649-0bc1-f111-a05a-6045bd061c5d"
     },

@@ -73,6 +73,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{8B2D3F55-6
 		..\docs\Check If User is in Team.md = ..\docs\Check If User is in Team.md
 		..\docs\Clone Children.md = ..\docs\Clone Children.md
 		..\docs\Clone Record.md = ..\docs\Clone Record.md
+		..\docs\Clone Record With Children.md = ..\docs\Clone Record With Children.md
 		..\docs\ConcatenateFromQuery.md = ..\docs\ConcatenateFromQuery.md
 		..\docs\Copy Marketing List Members.md = ..\docs\Copy Marketing List Members.md
 		..\docs\Copy To Static List.md = ..\docs\Copy To Static List.md
