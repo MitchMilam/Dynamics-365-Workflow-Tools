@@ -275,6 +275,89 @@ namespace msdyncrmWorkflowTools_Tests
         }
 
         [TestMethod]
+        public void CloneRecordWithChildren_CopiesTheChildrenUnderTheCopy()
+        {
+            var contact = Guid.NewGuid();
+            var project = Guid.NewGuid();
+            SetUpRecordWithChildren(contact, project);
+
+            var id = common.CloneRecordWithChildren(UrlFor(EntityNames.Account), "account_contacts; new_account_projects", null, "Copy of ", "new_note", "Child ",
+                false, false, out var childrenCloned);
+
+            Assert.AreEqual(2, childrenCloned);
+            Assert.AreEqual(3, service.Created.Count);
+            var copy = new EntityReference(EntityNames.Account, id);
+            Assert.AreEqual(EntityNames.Account, service.Created[0].LogicalName, "the record is copied first");
+            Assert.AreEqual($"Copy of {RecordId}", service.Created[0]["name"]);
+            Assert.AreEqual(copy, service.Created[1]["parentcustomerid"]);
+            Assert.AreEqual($"Child {contact}", service.Created[1]["lastname"]);
+            Assert.AreEqual(copy, service.Created[2]["new_accountid"]);
+            Assert.IsFalse(service.Created[2].Contains("new_note"), "the child fields to ignore");
+        }
+
+        [TestMethod]
+        public void CloneRecordWithChildren_CopiesNothingForARelationshipFromAnotherTable()
+        {
+            SetUpRecordWithChildren(Guid.NewGuid(), Guid.NewGuid());
+
+            var ex = Assert.ThrowsException<InvalidPluginExecutionException>(() => common.CloneRecordWithChildren(UrlFor(EntityNames.Account),
+                "account_contacts,contact_projects", null, null, null, null, false, false, out _));
+
+            Assert.AreEqual("'contact_projects' is not a relationship from account to its child records.", ex.Message);
+            Assert.AreEqual(0, service.Created.Count);
+        }
+
+        [TestMethod]
+        public void CloneRecordWithChildren_ExplainsAMissingRequiredInput()
+        {
+            AssertRequired("Source Record URL", () => common.CloneRecordWithChildren(string.Empty, "account_contacts", null, null, null, null, false, false, out _));
+            AssertRequired("Relationship Names", () => common.CloneRecordWithChildren(UrlFor(EntityNames.Account), " ", null, null, null, null, false, false, out _));
+            Assert.AreEqual(0, service.Created.Count);
+        }
+
+        private void SetUpRecordWithChildren(Guid contact, Guid project)
+        {
+            var relationships = new Dictionary<string, OneToManyRelationshipMetadata>
+            {
+                ["account_contacts"] = new OneToManyRelationshipMetadata { ReferencedEntity = EntityNames.Account, ReferencingEntity = EntityNames.Contact, ReferencingAttribute = "parentcustomerid" },
+                ["new_account_projects"] = new OneToManyRelationshipMetadata { ReferencedEntity = EntityNames.Account, ReferencingEntity = "new_project", ReferencingAttribute = "new_accountid" },
+                ["contact_projects"] = new OneToManyRelationshipMetadata { ReferencedEntity = EntityNames.Contact, ReferencingEntity = "new_project", ReferencingAttribute = "new_contactid" }
+            };
+            var metadata = new Dictionary<string, EntityMetadata>
+            {
+                [EntityNames.Account] = EntityWithAttributes("accountid", PrimaryName("name")),
+                [EntityNames.Contact] = EntityWithAttributes("contactid", PrimaryName("lastname"), Attribute<LookupAttributeMetadata>("parentcustomerid")),
+                ["new_project"] = EntityWithAttributes("new_projectid", Attribute<StringAttributeMetadata>("new_note"), Attribute<LookupAttributeMetadata>("new_accountid"))
+            };
+            var children = new Dictionary<string, Guid>
+            {
+                [EntityNames.Contact] = contact,
+                ["new_project"] = project
+            };
+
+            service.OnExecute = r => r is RetrieveRelationshipRequest relationshipRequest
+                ? (OrganizationResponse)new RetrieveRelationshipResponse { Results = { ["RelationshipMetadata"] = relationships[relationshipRequest.Name] } }
+                : new RetrieveEntityResponse { Results = { ["EntityMetadata"] = metadata[((RetrieveEntityRequest)r).LogicalName] } };
+            service.OnRetrieveMultiple = q => Collection(new Entity(((QueryByAttribute)q).EntityName, children[((QueryByAttribute)q).EntityName]));
+            service.OnRetrieve = (name, id, columns) => new Entity(name, id)
+            {
+                ["name"] = id.ToString(),
+                ["lastname"] = id.ToString(),
+                ["new_note"] = "note",
+                ["parentcustomerid"] = new EntityReference(EntityNames.Account, RecordId),
+                ["new_accountid"] = new EntityReference(EntityNames.Account, RecordId)
+            };
+        }
+
+        private static StringAttributeMetadata PrimaryName(string logicalName)
+        {
+            var attribute = Attribute<StringAttributeMetadata>(logicalName);
+            typeof(AttributeMetadata).GetProperty("IsPrimaryName").SetValue(attribute, (bool?)true);
+
+            return attribute;
+        }
+
+        [TestMethod]
         public void CloneChildRecords_CopiesEachChildWithTheReplacements()
         {
             var children = new[] { Guid.NewGuid(), Guid.NewGuid() };

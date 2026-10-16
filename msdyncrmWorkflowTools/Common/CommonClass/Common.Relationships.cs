@@ -230,6 +230,64 @@ namespace msdyncrmWorkflowTools
         }
 
         /// <summary>
+        /// Copies a record and its child records, for the Clone Record With Children activity: the record is copied
+        /// as Clone Record does, then the children through each relationship are copied as Clone Children does, with
+        /// their lookup set to the copy as part of their create.
+        /// </summary>
+        /// <param name="recordUrl">Record URL of the record to copy.</param>
+        /// <param name="relationshipNames">Schema names of the 1:N relationships from the record to the children to
+        /// copy, separated by "," or ";".</param>
+        /// <param name="fieldsToIgnore">Attributes of the record not to copy, separated by ";" or ",".</param>
+        /// <param name="prefix">Text put in front of the copy's primary name; null for none.</param>
+        /// <param name="childFieldsToIgnore">Attributes of the children not to copy, separated by ";" or ",".</param>
+        /// <param name="childPrefix">Text put in front of each child copy's primary name; null for none.</param>
+        /// <param name="copyChildStatus">Give each child copy its child's status and status reason.</param>
+        /// <param name="onlyActiveChildren">Only copy the active children.</param>
+        /// <param name="childrenCloned">The number of child copies made.</param>
+        /// <returns>The id of the copy of the record.</returns>
+        /// <exception cref="InvalidPluginExecutionException">A required input is empty, or a relationship isn't a
+        /// one-to-many relationship from the record's table. Nothing is copied then.</exception>
+        public Guid CloneRecordWithChildren(string recordUrl, string relationshipNames, string fieldsToIgnore, string prefix, string childFieldsToIgnore,
+            string childPrefix, bool copyChildStatus, bool onlyActiveChildren, out int childrenCloned)
+        {
+            var source = GetRecordReference(recordUrl, "Source Record URL");
+            var names = Utility.SplitList((relationshipNames ?? string.Empty).Replace(';', ','), removeDuplicates: true);
+
+            if (names.Count == 0)
+            {
+                throw new InvalidPluginExecutionException("Relationship Names is required.");
+            }
+
+            var lookups = new Dictionary<string, string>();
+
+            // check every relationship before copying anything, so a wrong name doesn't leave a copy without its children
+            foreach (var name in names)
+            {
+                var relationship = GetOneToManyRelationship(name);
+
+                if (!string.Equals(relationship.ReferencedEntity, source.LogicalName, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new InvalidPluginExecutionException($"'{name}' is not a relationship from {source.LogicalName} to its child records.");
+                }
+
+                lookups[name] = relationship.ReferencingAttribute;
+            }
+
+            var id = CloneRecord(source.LogicalName, source.Id, fieldsToIgnore, prefix);
+            var copy = new EntityReference(source.LogicalName, id);
+            childrenCloned = 0;
+
+            foreach (var lookup in lookups)
+            {
+                Trace($"Copying the children through {lookup.Key} ({lookup.Value})");
+                childrenCloned += CloneChildRecords(lookup.Key, source.Id, childFieldsToIgnore, childPrefix,
+                    CloneChildrenReplacements(copy, lookup.Value, null), copyChildStatus, onlyActiveChildren);
+            }
+
+            return id;
+        }
+
+        /// <summary>
         /// Copies the child records of a parent through a 1:N relationship (see <see cref="CloneRecord"/>).
         /// </summary>
         /// <param name="relationshipName">Schema name of the 1:N relationship.</param>

@@ -109,6 +109,7 @@ To see how to use each tool in this solution, follow these links:
 * 94 [Execute Workflow For Records In Query](/docs/ExecuteWorkflowForRecordsinQuery.md)
 * 95 [Get Environment Variable](/docs/GetEnvironmentVariable.md)
 * 96 [Numeric Operation](/docs/NumericOperation.md)
+* 97 [Clone Record With Children](/docs/Clone%20Record%20With%20Children.md)
 
 ## Activities, as seen in the Workflow Designer
 

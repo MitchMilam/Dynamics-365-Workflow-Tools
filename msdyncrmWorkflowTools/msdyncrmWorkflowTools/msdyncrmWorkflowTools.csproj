@@ -233,6 +233,7 @@
     <Compile Include="Class\QueryValues.cs" />
     <Compile Include="Class\RemoveFromMarketingList.cs" />
     <Compile Include="Class\CloneRecord.cs" />
+    <Compile Include="Class\CloneRecordWithChildren.cs" />
     <Compile Include="Class\EntityAttachmentToEmail.cs" />
     <Compile Include="Class\SetProcess.cs" />
     <Compile Include="Class\RollupFunctions.cs" />
